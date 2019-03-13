@@ -1,46 +1,45 @@
 #include <frame.h>
 
-frame decodeFrame(char *arr)
+frame decodeFrame(char *arr, frame *frame)
 {
-	frame frame;
-	frame.goodFrame = 1;
+	frame->goodFrame = 1;
 
 	//check and extract rpm information
 	if(arr[RPM_POSITION] == RPM_H)
 	{
 		//rpm = upper8Bits * 256 + lower8Bits
-		frame.rpm = (unsigned int)arr[RPM_POSITION + 1] * (1 << 8) + (unsigned int)arr[RPM_POSITION + 2];
+		frame->rpm = (unsigned int)arr[RPM_POSITION + 1] * (1 << 8) + (unsigned int)arr[RPM_POSITION + 2];
 		
 		//boundary value chack
-		if(frame.rpm > 12000)
+		if(frame->rpm > 12000)
 		{
-			frame.goodFrame = 0;
-			return frame;
+			frame->goodFrame = 0;
+			return 1;
 		}
 	}
 	else
 	{
-		frame.goodFrame = 0;
-		return frame;
+		frame->goodFrame = 0;
+		return 1;
 	}
 
 	//check and extract gear number
 	if(arr[GEAR_POSITION] == GEAR_H)
 	{
-		frame.gearNum = (unsigned int)arr[GEARPOSITION + 1];
+		frame->gearNum = (unsigned int)arr[GEARPOSITION + 1];
 
 		//boundary value check, gearNum should be bigger than 6
-		if(frame.gearNum > 6)
+		if(frame->gearNum > 6)
 		{
-			frame.goodFrame = 0;
-			return frame;
+			frame->goodFrame = 0;
+			return 1;
 		}
 	}
 	else
 	{
-		frame.goodFrame = 0;
-		return frame;
+		frame->goodFrame = 0;
+		return 1;
 	}
 	
-	return frame;
+	return 0;
 }

@@ -11,4 +11,4 @@ typedef struct
 	unsigned short goodFrame;
 } frame;
 
-extern frame decodeFrame(char *arr);
+extern int decodeFrame(char *arr, frame *frame);
