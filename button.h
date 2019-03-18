@@ -17,8 +17,6 @@ typedef struct
 	unsigned int dsr;
 	int shiftTime;
 	int dsrTime;
-	int shiftTimeOld;
-	int dsrTimeOld;
 } buttons;
 
 extern int buttonSetup();
