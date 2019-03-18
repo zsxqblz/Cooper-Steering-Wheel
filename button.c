@@ -17,30 +17,21 @@ int buttonScan(buttons *buttons)
 	{
 		delay(DELAY);
 		if(digitalRead(SHIFT_L == 0)
-		{
 			buttons->shiftl = 1;
-			//TODO: Timestamp in microsec
-		)
 	}
 	
 	if(digitalRead(SHIFT_R) == 0)
 	{
 		delay(DELAY);
 		if(digitalRead(SHIFT_R == 0)
-		{
 			buttons->shiftr = 1;
-			//TODO: Timestamp in microsec
-		}
 	}
 	
 	if(digitalRead(DSR) == 0)
 	{
 		delay(DELAY);
 		if(digitalRead(DSR) == 0)
-		{
 			buttons->dsr = 1;
-			//TODO: Timestamp in microsec
-		}
 	}
 
 	return 0;

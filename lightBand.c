@@ -115,7 +115,6 @@ int lightBandUpdate(int rpm)
     digitalWrite(R2, HIGH);
     break;
   }
- }
  return 0;
 }
 
@@ -157,6 +156,5 @@ int rpmTest(unsigned int input)
   {
    return 8;
   }
- }
  return -1;
 }
