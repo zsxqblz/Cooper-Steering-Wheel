@@ -9,6 +9,7 @@
 #include <wiringSerial.h>
 #include "frame.h"
 #include "lightBand.h"
+#include "button.h"
 
 #define SERIALPORT "/dev/ttyS0"
 #define BAUDRATE 19200
@@ -24,7 +25,6 @@ int main()
 	frame frame;
 	buttons buttons;
 	
-	wiringPiSetup();
 	if((fd = serialOpen(SERIALPORT, BAUDRATE)) < 0)
 	{
 		fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
@@ -43,7 +43,8 @@ int main()
 		//receive from serial
 		while(serialDataAvail(fd))
 		{
-			bufferptr++ = serialGetchar(fd);
+			*bufferptr = serialGetchar(fd);
+			bufferptr++;
 			//\n indicates the end of a frame
 			if(*(bufferptr - 1) == '\n')
 			{

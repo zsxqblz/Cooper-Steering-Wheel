@@ -1,4 +1,4 @@
-#include "lightband.h"
+#include "lightBand.h"
 
 int lightBandInit()
 {
@@ -114,7 +114,6 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, HIGH);
     digitalWrite(R2, HIGH);
     break;
-  }
  }
  return 0;
 }
@@ -157,6 +156,5 @@ int rpmTest(unsigned int input)
   {
    return 8;
   }
- }
  return -1;
 }

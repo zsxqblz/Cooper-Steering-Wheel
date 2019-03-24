@@ -1,6 +1,6 @@
-#include <frame.h>
+#include "frame.h"
 
-frame decodeFrame(char *arr, frame *frame)
+int decodeFrame(char *arr, frame *frame)
 {
 	frame->goodFrame = 1;
 
@@ -26,7 +26,7 @@ frame decodeFrame(char *arr, frame *frame)
 	//check and extract gear number
 	if(arr[GEAR_POSITION] == GEAR_H)
 	{
-		frame->gearNum = (unsigned int)arr[GEARPOSITION + 1];
+		frame->gearNum = (unsigned int)arr[GEAR_POSITION + 1];
 
 		//boundary value check, gearNum should be bigger than 6
 		if(frame->gearNum > 6)

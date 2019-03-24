@@ -1,3 +1,8 @@
+#ifndef WIRINGPI_H
+#define WIRINGPI_H
+#include <wiringPi.h>
+#endif
+
 #define RPM_1 2000
 #define RPM_2 3000
 #define RPM_3 4000
@@ -18,3 +23,4 @@
 #define R2 28
 
 extern int lightBandUpdate(int rpm);
+extern int rpmTest(unsigned int rpm);

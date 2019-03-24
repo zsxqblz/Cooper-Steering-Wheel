@@ -13,7 +13,7 @@ extern int fd;
 typedef struct
 {
 	unsigned int shiftl;
-	unsigned int shigtr;
+	unsigned int shiftr;
 	unsigned int dsr;
 	int shiftTime;
 	int dsrTime;
@@ -23,6 +23,6 @@ typedef struct
 
 extern int buttonSetup();
 extern int buttonScan(buttons *buttons);
-extern int sendButtonData(int fd, buttons *buttons)
+extern int sendButtonData(int fd, buttons *buttons);
 
 

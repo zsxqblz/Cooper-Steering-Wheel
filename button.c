@@ -16,31 +16,22 @@ int buttonScan(buttons *buttons)
 	if(digitalRead(SHIFT_L) == 0)
 	{
 		delay(DELAY);
-		if(digitalRead(SHIFT_L == 0)
-		{
+		if(digitalRead(SHIFT_L) == 0)
 			buttons->shiftl = 1;
-			//TODO: Timestamp in microsec
-		)
 	}
 	
 	if(digitalRead(SHIFT_R) == 0)
 	{
 		delay(DELAY);
-		if(digitalRead(SHIFT_R == 0)
-		{
+		if(digitalRead(SHIFT_R) == 0)
 			buttons->shiftr = 1;
-			//TODO: Timestamp in microsec
-		}
 	}
 	
 	if(digitalRead(DSR) == 0)
 	{
 		delay(DELAY);
 		if(digitalRead(DSR) == 0)
-		{
 			buttons->dsr = 1;
-			//TODO: Timestamp in microsec
-		}
 	}
 
 	return 0;
@@ -54,4 +45,6 @@ int sendButtonData(int fd, buttons *buttons)
 	str[3] = buttons->shiftr?'1':'0';
 	str[4] = buttons->dsr?'1':'0';
 	str[5] = '\n';
+	serialPrintf(fd,str);
+	return 0;
 }
