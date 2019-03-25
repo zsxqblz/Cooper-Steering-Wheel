@@ -22,5 +22,6 @@
 #define R1 27
 #define R2 28
 
+extern int lightBandInit();
 extern int lightBandUpdate(int rpm);
 extern int rpmTest(unsigned int rpm);

@@ -12,17 +12,18 @@
 #include "button.h"
 
 #define SERIALPORT "/dev/ttyS0"
-#define BAUDRATE 19200
+#define BAUDRATE 57600
 
 int fd;
 
 int main()
 {
-	int time;
+	int nextTime;
 	char buffer[100];
 	char *bufferptr = buffer;
-	char frameStr[FRAME_LENGTH];
+	//char frameStr[FRAME_LENGTH];
 	frame frame;
+	frame.rpm = 0;
 	buttons buttons;
 	
 	if((fd = serialOpen(SERIALPORT, BAUDRATE)) < 0)
@@ -37,6 +38,10 @@ int main()
 		return 1;
 	}
 	
+	buttonSetup();
+	lightBandInit();
+	nextTime = millis() + COMM_PERIOD;
+
 	//main program cycle
 	for(;;)
 	{
@@ -48,23 +53,31 @@ int main()
 			//\n indicates the end of a frame
 			if(*(bufferptr - 1) == '\n')
 			{
-				for(int i = 1; i <= 5; i++)
-					frameStr[i - 1] = *(bufferptr - i);
+				//for(int i = 1; i <= FRAME_LENGTH; i++)
+				//	frameStr[FRAME_LENGTH - i] = *(bufferptr - i - 1);
 				bufferptr = buffer; //ptr goes back to the top of the buffer
-				decodeFrame(frameStr, &frame);
+				//printf(frameStr);
+				//if(decodeFrame(frameStr, &frame) == 1)
+				//	fprintf(stderr, "bad\n");
+				int errorCode = decodeFrame(buffer, &frame);
+				if(errorCode > 0)
+					fprintf(stderr, "bad frame: %d\n", errorCode);
+
 			}
 
 		}
 
 		//receive input from button and send data
-		if(buttonScan(&buttons) > 0)
-			fprintf(stderr, "scan buttons failed");
-		else if(sendButtonData(fd, &buttons) > 0)
-			fprintf(stderr, "send data failed");
+		if(millis() > nextTime)
+		{
+			if(buttonScan(&buttons) < 0)
+				fprintf(stderr, "scan buttons failed");
+			else if(sendButtonData(fd, &buttons) < 0)
+				fprintf(stderr, "send data failed");
 
-		lightBandUpdate(frame.rpm);
-		
-		
+			lightBandUpdate(frame.rpm);
+			nextTime = millis() + COMM_PERIOD;
+		}
 	}
 	
 	return 0;
