@@ -1,2 +1,4 @@
 
 *.code-workspace
+*.bin
+*.ipch

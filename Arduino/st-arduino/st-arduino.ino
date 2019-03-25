@@ -4,8 +4,9 @@
 #define SHIFT_L 7
 #define SHIFT_R 8
 #define DSR 9
-#define VALVE_TIME 200
-#define VALVE_CONT_TIME 200
+#define VALVE_TIME 2000
+#define VALVE_CONT_TIME 2000
+#define COMM_PERIOD 100
 
 struct can_frame canMsg;
 MCP2515 mcp2515(10);
@@ -18,6 +19,7 @@ unsigned short dsrStatOld = 0;
 unsigned long shiftlTime = 0;
 unsigned long shiftrTime = 0;
 unsigned long dsrTime = 0;
+unsigned long nextTime = 0;
 
 char strbuffer[20];
 unsigned short i = 0;
@@ -29,28 +31,40 @@ void setup() {
   digitalWrite(SHIFT_L, LOW);
   digitalWrite(SHIFT_R, LOW);
   digitalWrite(DSR, LOW);
-  Serial.begin(19200);
+  Serial.begin(57600);
   SPI.begin();
   
   mcp2515.reset();
   mcp2515.setBitrate(CAN_250KBPS, MCP_8MHZ);
   mcp2515.setNormalMode();
-
+  
+  nextTime = millis() + COMM_PERIOD;
 }
 
 void loop() {
-  if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK) {
-      //send data
-      if(canMsg.can_id == RPM_ID)
-      {
-        Serial.print('r');
-        Serial.print(canMsg.data[0]);
-        Serial.print(canMsg.data[1]);
-        //send gear num
-        Serial.print('g');
-        Serial.print(getGear());
-        Serial.println();
-      }
+//  if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK) {
+//      //send data
+//      if(canMsg.can_id == RPM_ID)
+//      {
+//        Serial.print('r');
+//        Serial.print(canMsg.data[0]);
+//        Serial.print(canMsg.data[1]);
+//        //send gear num
+//        Serial.print('g');
+//        Serial.print(getGear());
+//        Serial.println();
+//      }
+//  }
+  if(millis() > nextTime)
+  {
+    Serial.print('r');
+    Serial.print((char)(millis()%0x23));
+    Serial.print((char)(0x00));
+    Serial.print('g');
+    Serial.print((char)(0x00));
+    Serial.print('\n');
+
+    nextTime = millis() + COMM_PERIOD;
   }
 
   //read buttons
@@ -65,8 +79,9 @@ void loop() {
         i = 0;
       }
     }
-    
-    valveUpdate(SHIFT_L, shiftlStat, shiftlStatOld, shiftlTime);
+
+    digitalWrite(SHIFT_L, shiftlStat);
+    //valveUpdate(SHIFT_L, shiftlStat, shiftlStatOld, shiftlTime);
     valveUpdate(SHIFT_R, shiftrStat, shiftrStatOld, shiftrTime);
     valveUpdate(DSR, dsrStat, dsrStatOld, dsrTime);
 
