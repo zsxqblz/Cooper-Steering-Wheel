@@ -5,8 +5,9 @@
 
 #define SHIFT_L 2
 #define SHIFT_R 3
-#define DSR 4
-#define DELAY 50
+#define DSR 0 
+#define DELAY 20
+#define COMM_PERIOD 100
 
 extern int fd;
 

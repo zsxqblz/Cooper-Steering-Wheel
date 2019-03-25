@@ -13,6 +13,10 @@ int buttonSetup()
 
 int buttonScan(buttons *buttons)
 {
+	buttons->shiftl = 0;
+	buttons->shiftr = 0;
+	buttons->dsr = 0;
+
 	if(digitalRead(SHIFT_L) == 0)
 	{
 		delay(DELAY);

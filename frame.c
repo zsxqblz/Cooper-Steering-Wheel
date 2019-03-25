@@ -20,7 +20,7 @@ int decodeFrame(char *arr, frame *frame)
 	else
 	{
 		frame->goodFrame = 0;
-		return 1;
+		return 2;
 	}
 
 	//check and extract gear number
@@ -32,13 +32,13 @@ int decodeFrame(char *arr, frame *frame)
 		if(frame->gearNum > 6)
 		{
 			frame->goodFrame = 0;
-			return 1;
+			return 3;
 		}
 	}
 	else
 	{
 		frame->goodFrame = 0;
-		return 1;
+		return 4;
 	}
 	
 	return 0;

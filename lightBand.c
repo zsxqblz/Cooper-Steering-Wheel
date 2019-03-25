@@ -19,6 +19,8 @@ int lightBandInit()
         digitalWrite(Y2, LOW);
         digitalWrite(R1, LOW);
         digitalWrite(R2, LOW);	
+	
+	return 0;
 }
 
 int lightBandUpdate(int rpm)
