@@ -7,7 +7,8 @@
 typedef struct
 {
 	unsigned int rpm;
-	unsigned int gearNum;
+	unsigned short gearNum;
+	short tps;
 	unsigned short goodFrame;
 } frame;
 

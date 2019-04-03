@@ -1,4 +1,7 @@
+#ifndef STDIO_H
+#define STDIO_H
 #include <stdio.h>
+#endif
 #include <string.h>
 #include <errno.h>
 
@@ -7,16 +10,20 @@
 #include <wiringPi.h>
 #endif
 #include <wiringSerial.h>
+#ifndef FRAME_H
+#define FRAME_H
 #include "frame.h"
+#endif
 #include "lightBand.h"
 #include "button.h"
+#include "display.h"
 
 #define SERIALPORT "/dev/ttyS0"
 #define BAUDRATE 57600
 
 int fd;
 
-int main()
+int main(int argc, char **argv)
 {
 	int nextTime;
 	char buffer[100];
@@ -40,6 +47,7 @@ int main()
 	
 	buttonSetup();
 	lightBandInit();
+	windowPtrs wptrs = displayInit(argc, argv);
 	nextTime = millis() + COMM_PERIOD;
 
 	//main program cycle
@@ -78,6 +86,8 @@ int main()
 			lightBandUpdate(frame.rpm);
 			nextTime = millis() + COMM_PERIOD;
 		}
+
+		displayUpdate(frame, wptrs);
 	}
 	
 	return 0;
