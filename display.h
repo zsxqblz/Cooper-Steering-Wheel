@@ -19,6 +19,8 @@ typedef struct
 	GtkWidget *label_rpm;
 	GtkWidget *label_gearNum;
 	GtkWidget *label_tps;
+
+	// all buffers are for holding the string converted from the int by sprintf()
 	char rpm_buffer[6];
 	char gearNum_buffer[2];
 	char tps_buffer[4];
