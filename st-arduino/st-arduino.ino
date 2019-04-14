@@ -4,8 +4,8 @@
 #define SHIFT_L 7
 #define SHIFT_R 8
 #define DSR 9
-#define VALVE_TIME 2000
-#define VALVE_CONT_TIME 2000
+#define VALVE_TIME 10000
+#define VALVE_CONT_TIME 30000
 #define COMM_PERIOD 100
 
 struct can_frame canMsg;
@@ -80,8 +80,8 @@ void loop() {
       }
     }
 
-    digitalWrite(SHIFT_L, shiftlStat);
-    //valveUpdate(SHIFT_L, shiftlStat, shiftlStatOld, shiftlTime);
+//    digitalWrite(SHIFT_L, shiftlStat);
+    valveUpdate(SHIFT_L, shiftlStat, shiftlStatOld, shiftlTime);
     valveUpdate(SHIFT_R, shiftrStat, shiftrStatOld, shiftrTime);
     valveUpdate(DSR, dsrStat, dsrStatOld, dsrTime);
 

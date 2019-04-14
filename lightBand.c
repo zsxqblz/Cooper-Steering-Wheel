@@ -2,61 +2,61 @@
 
 int lightBandInit()
 {
-	pinMode(G1, OUTPUT);
-	pinMode(G2, OUTPUT);
-	pinMode(G3, OUTPUT);
-	pinMode(G4, OUTPUT);
-	pinMode(Y1, OUTPUT);
-	pinMode(Y2, OUTPUT);
-	pinMode(R1, OUTPUT);
-	pinMode(R2, OUTPUT);
+  pinMode(G1, OUTPUT);
+  pinMode(G2, OUTPUT);
+  pinMode(G3, OUTPUT);
+  pinMode(G4, OUTPUT);
+  pinMode(Y1, OUTPUT);
+  pinMode(Y2, OUTPUT);
+  pinMode(R1, OUTPUT);
+  pinMode(R2, OUTPUT);
 
-	digitalWrite(G1, LOW);
-        digitalWrite(G2, LOW);
-        digitalWrite(G3, LOW);
-        digitalWrite(G4, LOW);
-        digitalWrite(Y1, LOW);
-        digitalWrite(Y2, LOW);
-        digitalWrite(R1, LOW);
-        digitalWrite(R2, LOW);	
-	
-	return 0;
+  digitalWrite(G1, LOW);
+  digitalWrite(G2, LOW);
+  digitalWrite(G3, LOW);
+  digitalWrite(G4, LOW);
+  digitalWrite(Y1, LOW);
+  digitalWrite(Y2, LOW);
+  digitalWrite(R1, LOW);
+  digitalWrite(R2, LOW);
+
+  return 0;
 }
 
 int lightBandUpdate(int rpm)
 {
   switch (rpmTest(rpm))
   {
-   case 0:
-   				digitalWrite(G1, LOW);
-				digitalWrite(G2, LOW);
-				digitalWrite(G3, LOW);
-				digitalWrite(G4, LOW);
-				digitalWrite(Y1, LOW);
-				digitalWrite(Y2, LOW);
-				digitalWrite(R1, LOW);
-				digitalWrite(R2, LOW);
-   case 1:
-                                digitalWrite(G1, HIGH);
-                                digitalWrite(G2, LOW);
-                                digitalWrite(G3, LOW);
-                                digitalWrite(G4, LOW);
-                                digitalWrite(Y1, LOW);
-                                digitalWrite(Y2, LOW);
-                                digitalWrite(R1, LOW);
-                                digitalWrite(R2, LOW);
+  case 0:
+    digitalWrite(G1, LOW);
+    digitalWrite(G2, LOW);
+    digitalWrite(G3, LOW);
+    digitalWrite(G4, LOW);
+    digitalWrite(Y1, LOW);
+    digitalWrite(Y2, LOW);
+    digitalWrite(R1, LOW);
+    digitalWrite(R2, LOW);
+  case 1:
+    digitalWrite(G1, HIGH);
+    digitalWrite(G2, LOW);
+    digitalWrite(G3, LOW);
+    digitalWrite(G4, LOW);
+    digitalWrite(Y1, LOW);
+    digitalWrite(Y2, LOW);
+    digitalWrite(R1, LOW);
+    digitalWrite(R2, LOW);
     break;
-   case 2:
-                                digitalWrite(G1, HIGH);
-                                digitalWrite(G2, HIGH);
-                                digitalWrite(G3, LOW);
-                                digitalWrite(G4, LOW);
-                                digitalWrite(Y1, LOW);
-                                digitalWrite(Y2, LOW);
-                                digitalWrite(R1, LOW);
-                                digitalWrite(R2, LOW);
+  case 2:
+    digitalWrite(G1, HIGH);
+    digitalWrite(G2, HIGH);
+    digitalWrite(G3, LOW);
+    digitalWrite(G4, LOW);
+    digitalWrite(Y1, LOW);
+    digitalWrite(Y2, LOW);
+    digitalWrite(R1, LOW);
+    digitalWrite(R2, LOW);
     break;
-   case 3:
+  case 3:
     digitalWrite(G1, HIGH);
     digitalWrite(G2, HIGH);
     digitalWrite(G3, HIGH);
@@ -66,7 +66,7 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, LOW);
     digitalWrite(R2, LOW);
     break;
-   case 4:
+  case 4:
     digitalWrite(G1, HIGH);
     digitalWrite(G2, HIGH);
     digitalWrite(G3, HIGH);
@@ -76,7 +76,7 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, LOW);
     digitalWrite(R2, LOW);
     break;
-   case 5:
+  case 5:
     digitalWrite(G1, HIGH);
     digitalWrite(G2, HIGH);
     digitalWrite(G3, HIGH);
@@ -86,7 +86,7 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, LOW);
     digitalWrite(R1, LOW);
     break;
-   case 6:
+  case 6:
     digitalWrite(G1, HIGH);
     digitalWrite(G2, HIGH);
     digitalWrite(G3, HIGH);
@@ -96,7 +96,7 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, LOW);
     digitalWrite(R2, LOW);
     break;
-   case 7:
+  case 7:
     digitalWrite(G1, HIGH);
     digitalWrite(G2, HIGH);
     digitalWrite(G3, HIGH);
@@ -106,7 +106,7 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, HIGH);
     digitalWrite(R2, LOW);
     break;
-   case 8:
+  case 8:
     digitalWrite(G1, HIGH);
     digitalWrite(G2, HIGH);
     digitalWrite(G3, HIGH);
@@ -116,47 +116,47 @@ int lightBandUpdate(int rpm)
     digitalWrite(R1, HIGH);
     digitalWrite(R2, HIGH);
     break;
- }
- return 0;
+  }
+  return 0;
 }
 
-int rpmTest(unsigned int input) 
+int rpmTest(unsigned int input)
 {
-  if(input <RPM_1)
+  if (input < RPM_1)
   {
-   return 0;
+    return 0;
   }
-  if(input >= RPM_1 && input<=RPM_2)
+  if (input >= RPM_1 && input <= RPM_2)
   {
-   return 1;
+    return 1;
   }
-  else if(input >RPM_2 && input <= RPM_3)
+  else if (input > RPM_2 && input <= RPM_3)
   {
-   return 2;
+    return 2;
   }
-  else if(input >RPM_3 && input <= RPM_4)
+  else if (input > RPM_3 && input <= RPM_4)
   {
-   return 3;
+    return 3;
   }
-  else if(input >RPM_4 && input <= RPM_5)
+  else if (input > RPM_4 && input <= RPM_5)
   {
-   return 4;
+    return 4;
   }
-  else if(input >RPM_5 && input <= RPM_6)
+  else if (input > RPM_5 && input <= RPM_6)
   {
-   return 5;
+    return 5;
   }
-  else if(input >RPM_6 && input <= RPM_7)
+  else if (input > RPM_6 && input <= RPM_7)
   {
-   return 6;
+    return 6;
   }
-  else if(input >RPM_7 && input <= RPM_8)
+  else if (input > RPM_7 && input <= RPM_8)
   {
-   return 7;
+    return 7;
   }
-  else if(input >RPM_8)   
+  else if (input > RPM_8)
   {
-   return 8;
+    return 8;
   }
- return -1;
+  return -1;
 }

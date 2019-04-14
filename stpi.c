@@ -44,9 +44,11 @@ int main(int argc, char **argv)
 		fprintf (stdout, "Unable to start wiringPi: %s\n", strerror (errno)) ;
 		return 1;
 	}
-	
+	// initialize pins for buttons
 	buttonSetup();
+	// initialize pins for lightband
 	lightBandInit();
+	// initialize screen and obtain the pointers to labels
 	windowPtrs wptrs = displayInit(argc, argv);
 	nextTime = millis() + COMM_PERIOD;
 
@@ -87,6 +89,7 @@ int main(int argc, char **argv)
 			nextTime = millis() + COMM_PERIOD;
 		}
 
+		//update display
 		displayUpdate(frame, wptrs);
 	}
 	
