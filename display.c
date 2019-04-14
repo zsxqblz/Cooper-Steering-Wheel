@@ -44,7 +44,7 @@ windowPtrs displayInit(int argc, char **argv)
 	set_widget_font_size(label_tps, FONT_SIZE);
 	gtk_table_attach_defaults(GTK_TABLE(table), label_tps, 2,3,1,2);
 
-	gtk_widget_set_size_request(GTK_WIDGET(window), SCREEN_LENGTH, SCREEN_HEIGHT);
+	//gtk_widget_set_size_request(GTK_WIDGET(window), SCREEN_LENGTH, SCREEN_HEIGHT);
 	gtk_widget_realize (window);
 	gtk_window_fullscreen(window);
 	gtk_widget_show_all(window);

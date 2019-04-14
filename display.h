@@ -9,7 +9,7 @@
 #include "frame.h"
 #endif
 
-#define FONT_SIZE 40
+#define FONT_SIZE 30
 #define SCREEN_LENGTH 650
 #define SCREEN_HEIGHT 460
 
