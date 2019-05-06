@@ -22,6 +22,19 @@ int decodeFrame(char *arr, frame *frame)
 		frame->goodFrame = 0;
 		return 2;
 	}
+	
+	if(arr[TPS_POSITION] == TPS_H)
+	{
+		//rpm = upper8Bits * 256 + lower8Bits
+		frame->tps = (short)arr[TPS_POSITION + 1] * (1 << 8) + (short int)arr[TPS_POSITION + 2];
+		
+		//boundary value chack
+		if(frame->tps > 100)
+		{
+			frame->goodFrame = 0;
+			return 3;
+		}
+	}
 
 	//check and extract gear number
 	if(arr[GEAR_POSITION] == GEAR_H)
@@ -32,14 +45,14 @@ int decodeFrame(char *arr, frame *frame)
 		if(frame->gearNum > 6)
 		{
 			frame->goodFrame = 0;
-			return 3;
+			return 4;
 		}
 	}
 	else
 	{
 		frame->goodFrame = 0;
-		return 4;
+		return 5;
 	}
-	
+
 	return 0;
 }

@@ -72,9 +72,7 @@ int main(int argc, char **argv)
 				int errorCode = decodeFrame(buffer, &frame);
 				if(errorCode > 0)
 					fprintf(stderr, "bad frame: %d\n", errorCode);
-
 			}
-
 		}
 
 		//receive input from button and send data
